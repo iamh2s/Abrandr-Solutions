@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #ef4444;
+  --color-brand-light: #f87171;
+  --color-brand-dark: #dc2626;
+  --color-dark: #09090b;
+  --color-dark-card: #111113;
+  --color-dark-border: #1e1e22;
+  --color-dark-text: #a1a1aa;
+  --color-dark-heading: #e4e4e7;
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-dark-text);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+.font-display {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background-color: var(--color-brand);
+  color: #09090b;
+}
+
+/* ── Gradient Animated Text ── */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ef4444, #f87171, #fca5a5, #ef4444);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* ── Glassmorphism Card ── */
+.glass-card {
+  background: rgba(17, 17, 19, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(30, 30, 34, 0.7);
+}
+
+/* ── Floating Animation ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ── Pulsing Glow ── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* ── Noise background ── */
+.noise-bg {
+  position: relative;
+}
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Smooth reveal underline ── */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--color-brand);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* ── Shimmer effect ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(239,68,68,0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ── Line clamp ── */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Glow border on hover ── */
+.glow-border {
+  position: relative;
+  overflow: hidden;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, transparent, var(--color-brand), transparent, transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  animation: spin 4s linear infinite paused;
+}
+.glow-border:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Admin sidebar slide-in ── */
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* ── Form field error state ── */
+.field-error input,
+.field-error textarea,
+.field-error select {
+  border-color: #f87171 !important;
+}
+
+/* ── Hide custom cursor on touch ── */
+@media (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none !important; }
+}
+
+/* ── Shadcn CSS Variables (dark-first for this site) ── */
+:root {
+  --background: 0 0% 3.5%;
+  --foreground: 240 5% 64.9%;
+  --card: 240 2% 6.7%;
+  --card-foreground: 240 5.9% 90%;
+  --popover: 240 2% 8%;
+  --popover-foreground: 240 5.9% 90%;
+  --primary: 0 84% 60.2%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 3% 12%;
+  --secondary-foreground: 240 5% 65%;
+  --muted: 240 3% 12%;
+  --muted-foreground: 240 5% 55%;
+  --accent: 240 3% 10%;
+  --accent-foreground: 240 5.9% 90%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 3.7% 13.5%;
+  --input: 240 3.7% 18%;
+  --ring: 0 84% 60.2%;
+  --radius: 0.5rem;
+}
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip; /* or hidden if clip isn't available */
+}
+
+#__next,
+main {
+  width: 100%;
+  overflow-x: clip;
+}
