@@ -7,9 +7,11 @@ export default function ParticleField() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D | null;
+
     if (!ctx) return;
 
     let animationId = 0;
@@ -31,7 +33,9 @@ export default function ParticleField() {
       r: Math.random() * 2 + 1,
     }));
 
-    function animate() {
+    const animate = () => {
+      if (!ctx) return;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = "rgba(239,68,68,0.25)";
@@ -52,7 +56,7 @@ export default function ParticleField() {
       }
 
       animationId = requestAnimationFrame(animate);
-    }
+    };
 
     animate();
 
