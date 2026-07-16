@@ -113,7 +113,7 @@ export default function AdminLoginPage() {
         </div>
 
         <p className="text-center text-dark-text/50 text-xs mt-4">
-          Default: admin@abrandr.com / admin123
+          Default: admin@abrandr.com / Admin@2025
         </p>
       </div>
     </div>
